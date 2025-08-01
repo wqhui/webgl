@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WebGL 1</h1>
+        <div class="canvas-container">
+            <canvas id="webgl-canvas" width="800" height="600"></canvas>
+        </div>
+        <div class="controls">
+            <button id="triangle-btn">绘制三角形</button>
+            <button id="square-btn">绘制正方形</button>
+            <button id="rotate-btn">旋转动画</button>
+            <button id="clear-btn">清除画布</button>
+        </div>
+        <div class="info">
+            <h3>WebGL 基础概念：</h3>
+            <ul>
+                <li><strong>顶点着色器</strong>：处理顶点位置和属性</li>
+                <li><strong>片段着色器</strong>：处理像素颜色</li>
+                <li><strong>缓冲区</strong>：存储顶点数据</li>
+                <li><strong>程序对象</strong>：链接着色器</li>
+            </ul>
+        </div>
+    </div>
+    <script src="../common/webgl-utils.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

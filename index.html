@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL 学习项目</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 50px;
+            font-size: 1.2em;
+        }
+        
+        .chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .chapter-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .chapter-title {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .chapter-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .chapter-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .chapter-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+        
+        .chapter-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+        
+        .chapter-link {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .chapter-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .info-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .chapters {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WebGL 学习项目</h1>
+        <p class="subtitle">从基础到进阶，系统学习WebGL图形编程</p>
+        
+        <div class="chapters">
+            <div class="chapter-card">
+                <h2 class="chapter-title">第一章：WebGL基础</h2>
+                <p class="chapter-description">
+                    学习WebGL的基本概念，包括着色器、缓冲区、基础图形绘制和简单动画。
+                </p>
+                <ul class="chapter-features">
+                    <li>WebGL上下文初始化</li>
+                    <li>顶点着色器和片段着色器</li>
+                    <li>绘制彩色三角形和正方形</li>
+                    <li>旋转动画和颜色渐变</li>
+                    <li>变换矩阵基础</li>
+                </ul>
+                <a href="chap1/" class="chapter-link">开始学习</a>
+            </div>
+            
+            <div class="chapter-card">
+                <h2 class="chapter-title">第二章：即将推出</h2>
+                <p class="chapter-description">
+                    更多高级功能正在开发中，敬请期待...
+                </p>
+                <ul class="chapter-features">
+                    <li>3D图形绘制</li>
+                    <li>纹理贴图</li>
+                    <li>光照效果</li>
+                    <li>相机控制</li>
+                </ul>
+                <a href="#" class="chapter-link" style="opacity: 0.6; cursor: not-allowed;">敬请期待</a>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h2>项目结构</h2>
+            <p>
+                本项目采用模块化设计，每个章节都有独立的文件夹，公共工具函数统一放在 <code>common/</code> 目录下。
+                这样的结构便于维护和扩展，你可以轻松添加新的章节和功能。
+            </p>
+            <p>
+                <strong>目录结构：</strong><br>
+                📁 webgl/<br>
+                ├── 📁 chap1/ - 第一章内容<br>
+                ├── 📁 common/ - 公共工具函数<br>
+                ├── 📄 index.html - 项目导航页<br>
+                └── 📄 README.md - 项目说明
+            </p>
+        </div>
+    </div>
+</body>
+</html>
