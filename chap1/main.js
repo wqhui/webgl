@@ -155,15 +155,15 @@ class WebGLApp {
         //this.gl.FLOAT：数据类型是 32 位浮点数
         //false：不需要将数据归一化
         //5 * 4：相邻两个顶点数据之间的字节数（步长），这里表示每个顶点数据占用 20 字节
-        //0：从缓冲区起始位置开始读取数据
+        //0：从缓冲区(vertices的数据)起始位置开始读取数据
         this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 5 * 4, 0);
         
         // 设置颜色属性
         //调用gl.getAttribLocation().获取属性位置
         const colorLocation = this.gl.getAttribLocation(this.program, 'a_color');
-        console.log('----------colorLocation----------', colorLocation)
         //调用gl.enableVertexAttribArray().启用顶点属性数组
         this.gl.enableVertexAttribArray(colorLocation);
+        // 2 * 4 是因为位置已经读取了，需要从缓冲区(vertices的数据)位置之后读取颜色数据
         this.gl.vertexAttribPointer(colorLocation, 3, this.gl.FLOAT, false, 5 * 4, 2 * 4);
         
         // 清除画布并绘制
