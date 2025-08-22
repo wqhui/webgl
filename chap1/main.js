@@ -32,10 +32,10 @@ class WebGLApp {
             return;
         }
         
-        const vertexShaderSource = await fetch('./shaders/peak.vert').then(res => res.text());
+        const vertexShaderSource = await fetch('./shaders/vertex.vert').then(res => res.text());
         const fragmentShaderSource = await fetch('./shaders/fragment.frag').then(res => res.text());
 
-        const animationVertexShaderSource = await fetch('./shaders/peak2.vert').then(res => res.text());
+        const animationVertexShaderSource = await fetch('./shaders/vertex2.vert').then(res => res.text());
         const animationFragmentShaderSource = await fetch('./shaders/fragment2.frag').then(res => res.text());
 
         // 创建着色器程序
@@ -61,6 +61,7 @@ class WebGLApp {
     
     bindEvents() {
         const triangleBtn = document.getElementById('triangle-btn');
+        const invertedTriangleBtn = document.getElementById('inverted-triangle-btn');
         const squareBtn = document.getElementById('square-btn');
         const rotateBtn = document.getElementById('rotate-btn');
         const clearBtn = document.getElementById('clear-btn');
@@ -68,6 +69,12 @@ class WebGLApp {
         if (triangleBtn) {
             triangleBtn.addEventListener('click', () => {
                 this.drawTriangle();
+            });
+        }
+        
+        if (invertedTriangleBtn) {
+            invertedTriangleBtn.addEventListener('click', () => {
+                this.drawInvertedTriangle();
             });
         }
         
@@ -139,6 +146,7 @@ class WebGLApp {
             alert('着色器程序不存在');
             return;
         }
+        // 绑定着色器程序
         this.gl.useProgram(this.program);
         
         // 创建缓冲区
@@ -156,7 +164,7 @@ class WebGLApp {
         //false：不需要将数据归一化
         //5 * 4：相邻两个顶点数据之间的字节数（步长），这里表示每个顶点数据占用 20 字节
         //0：从缓冲区(vertices的数据)起始位置开始读取数据
-        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 5 * 4, 0);
+        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 5 * 4, 0); //5 * 4, 0
         
         // 设置颜色属性
         //调用gl.getAttribLocation().获取属性位置
@@ -164,11 +172,57 @@ class WebGLApp {
         //调用gl.enableVertexAttribArray().启用顶点属性数组
         this.gl.enableVertexAttribArray(colorLocation);
         // 2 * 4 是因为位置已经读取了，需要从缓冲区(vertices的数据)位置之后读取颜色数据
-        this.gl.vertexAttribPointer(colorLocation, 3, this.gl.FLOAT, false, 5 * 4, 2 * 4);
+        this.gl.vertexAttribPointer(colorLocation, 3, this.gl.FLOAT, false, 5 * 4, 2 * 4); // 5 * 4, 2 * 4
         
         // 清除画布并绘制
         clearCanvas(this.gl, 0.1, 0.1, 0.1, 1.0);
         this.gl.drawArrays(drawMode, 0, vertexCount);
+    }
+
+    drawInvertedTriangle(){
+        this.stopAnimation();
+        
+        const vertices = [
+            -0.5,0.5, 
+            0.5,0.5,
+            0.5,-0.5,
+        ]
+
+        const colors = [
+            1.0, 0.0, 0.0,
+            0.0, 1.0, 0.0,
+            0.0, 0.0, 1.0,
+        ]
+
+        if (!this.gl) {
+            alert('WebGL上下文不存在');
+            return;
+        }
+        if (!this.program) {
+            alert('着色器程序不存在');
+            return;
+        }
+        // 绑定着色器程序
+        this.gl.useProgram(this.program);
+
+        
+        
+
+        // 设置位置属性
+        const vertexBuffer = createBuffer(this.gl, new Float32Array(vertices));
+        const positionLocation = this.gl.getAttribLocation(this.program, 'a_position');
+        this.gl.enableVertexAttribArray(positionLocation);
+        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
+
+        // 设置颜色属性
+        const colorBuffer = createBuffer(this.gl, new Float32Array(colors));
+        const colorLocation = this.gl.getAttribLocation(this.program, 'a_color');
+        this.gl.enableVertexAttribArray(colorLocation);
+        this.gl.vertexAttribPointer(colorLocation, 3, this.gl.FLOAT, false, 0, 0);
+
+        // 清除画布并绘制
+        clearCanvas(this.gl, 0.1, 0.1, 0.1, 1.0);
+        this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);
     }
     
     toggleAnimation() {
@@ -206,7 +260,6 @@ class WebGLApp {
         
         const currentTime = Date.now();
         const elapsed = (currentTime - this.startTime) / 1000.0;
-        const rotation = elapsed * 2.0; // 每秒旋转2弧度
         
         // 旋转三角形的顶点数据
         const vertices = new Float32Array([
@@ -232,6 +285,8 @@ class WebGLApp {
         
         // 设置变换矩阵
         const transformLocation = this.gl.getUniformLocation(this.animationProgram, 'u_transform');
+        // 计算旋转角度
+        const rotation = elapsed * 2.0; // 每秒旋转2弧度
         const transformMatrix = createTransformMatrix(0, 0, rotation, 1, 1);
         this.gl.uniformMatrix3fv(transformLocation, false, transformMatrix);
         

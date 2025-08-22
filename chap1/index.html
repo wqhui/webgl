@@ -14,6 +14,7 @@
         </div>
         <div class="controls">
             <button id="triangle-btn">绘制三角形</button>
+            <button id="inverted-triangle-btn">绘制倒三角形</button>
             <button id="square-btn">绘制正方形</button>
             <button id="rotate-btn">旋转动画</button>
             <button id="clear-btn">清除画布</button>
@@ -21,8 +22,19 @@
         <div class="info">
             <h3>WebGL 基础概念：</h3>
             <ul>
-                <li><strong>顶点着色器</strong>：处理顶点位置和属性</li>
-                <li><strong>片段着色器</strong>：处理像素颜色</li>
+                <li><strong>着色器</strong>：
+                    使用 OpenGL ES 着色语言(GLSL) 编写的程序，它携带着绘制形状的顶点信息以及构造绘制在屏幕上像素的所需数据，换句话说，它负责记录着像素点的位置和颜色。
+                </li>
+                <li><strong>顶点着色器 VERTEX_SHADER</strong>：
+                    每次渲染一个形状时，顶点着色器会在形状中的<strong>每个顶点</strong>运行。
+                    它的工作是将输入 顶点从原始坐标系转换到 WebGL 使用的裁剪空间坐标系，其中每个轴的坐标范围从 -1.0 到 1.0，并且不考虑纵横比，实际尺寸或任何其他因素。
+                    顶点着色器需要对顶点坐标进行必要的转换，在每个顶点基础上进行其他调整或计算，然后通过将其保存在由 GLSL 提供的特殊变量（我们称为 gl_Position）中来返回变换后的顶点
+                </li>
+                <li><strong>片段着色器 FRAGMENT_SHADER</strong>：
+                    每次渲染一个形状时，顶点着色器处理完图形的顶点后，会被要绘制的<strong>每个图形的每个像素点</strong>调用一次。
+                    它的职责是确定像素的颜色，通过指定应用到像素的纹理元素（也就是图形纹理中的像素），获取纹理元素的颜色，然后将适当的光照应用于颜色。
+                    之后颜色存储在特殊变量 gl_FragColor 中，返回到 WebGL 层。该颜色将最终绘制到屏幕上图形对应像素的对应位置。
+                </li>
                 <li><strong>缓冲区</strong>：存储顶点数据</li>
                 <li><strong>程序对象</strong>：链接着色器</li>
             </ul>

@@ -1,0 +1,170 @@
+/* WebGL 第二章样式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.canvas-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#webgl-canvas {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: #000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+    text-align: center;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mode-controls, .animation-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mode-controls h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.mode-controls {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.mode-btn {
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(116, 185, 255, 0.3);
+}
+
+.mode-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0, 184, 148, 0.4);
+}
+
+.animation-controls button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.animation-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.animation-controls button:active {
+    transform: translateY(0);
+}
+
+.info {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 25px;
+    text-align: left;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.info h3 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.info ul {
+    list-style: none;
+}
+
+.info li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-left: 4px solid #ffd700;
+}
+
+.info strong {
+    color: #ffd700;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    #webgl-canvas {
+        width: 100%;
+        height: auto;
+    }
+    
+    .controls button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

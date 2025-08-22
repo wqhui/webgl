@@ -36,8 +36,8 @@ function createShader(gl, type, source) {
  */
 function createProgram(gl, vertexShaderSource, fragmentShaderSource) {
     //调用gl.createShader().创建一个新的着色器
-    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);//顶点
+    const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);//片段
     
     if (!vertexShader || !fragmentShader) {
         return null;

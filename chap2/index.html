@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL 第二章 - 3D立方体</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WebGL 第二章 - 3D立方体</h1>
+        <div class="canvas-container">
+            <canvas id="webgl-canvas" width="800" height="600"></canvas>
+        </div>
+        <div class="controls">
+            <div class="mode-controls">
+                <button id="basic-btn" class="mode-btn active">基础立方体</button>
+                <button id="texture-btn" class="mode-btn">纹理映射</button>
+                <button id="lighting-btn" class="mode-btn">光照效果</button>
+                <button id="animated-texture-btn" class="mode-btn">动画纹理</button>
+            </div>
+            <div class="animation-controls">
+                <input type="checkbox" id="animation-checkbox" checked>
+                <label for="animation-checkbox">启用动画</label>
+            </div>
+        </div>
+        <div class="info">
+            <h3>WebGL 3D 概念：</h3>
+            <ul>
+                <li><strong>3D坐标系</strong>：
+                    使用三维坐标(x, y, z)来定义顶点位置，z轴表示深度。
+                </li>
+                <li><strong>索引缓冲区</strong>：
+                    使用gl.drawElements()代替gl.drawArrays()，通过索引来引用顶点，减少重复数据。
+                </li>
+                <li><strong>投影矩阵</strong>：
+                    将3D坐标转换为2D屏幕坐标，实现透视效果。
+                </li>
+                <li><strong>模型视图矩阵</strong>：
+                    控制物体的位置、旋转和缩放变换。
+                </li>
+                <li><strong>深度测试</strong>：
+                    确保前面的物体遮挡后面的物体，实现正确的3D渲染。
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- <script src="../common/webgl-utils.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
